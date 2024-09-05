@@ -8,11 +8,11 @@ describe("Order service unit tets", () => {
     it("should place an order", () => {
         const customer = new Customer("c1", "Customer 1");
         const item1 = new OrderItem("p1", "i1", "Item 1", 10, 1);
+        const item2 = new OrderItem("p2", "i2", "Item 2", 5, 100);
+        const order = OrderService.placeOrder(customer, [item1, item2]);
 
-        const order = OrderService.placeOrder(customer, [item1]);
-
-        expect(customer.rewardPoints).toBe(5);
-        expect(order.total()).toBe(10);
+        expect(customer.rewardPoints).toBe(255);
+        expect(order.total()).toBe(510);
     });
 
     it("should get total of all orders", () => {

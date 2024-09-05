@@ -1,7 +1,7 @@
 import Customer from "../entity/customer";
 import Order from "../entity/order";
 import OrderItem from "../entity/order_item";
-
+import {v4 as uuid} from "uuid";
 export default class OrderService{
 
     static placeOrder(customer: Customer, items: OrderItem[]): Order{
@@ -13,9 +13,9 @@ export default class OrderService{
         }
         */
 
-        const order = new Order("o1", "c1", items);
+        const order = new Order(uuid(), "c1", items);
         customer.addRewardPoints(order.total()/2);
-        
+
         return order;
     }
 
