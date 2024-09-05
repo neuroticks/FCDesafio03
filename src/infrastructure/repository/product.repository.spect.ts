@@ -4,16 +4,18 @@ import { validateLocaleAndSetLanguage } from "typescript";
 describe("Product repository test", () => {
     let sequelize: Sequelize;
 
-    beforeEach(async ()=>{
+    beforeEach(async () => {
         sequelize = new Sequelize({
-            dialect:'sqlite',
-            storage:':memory',
+            dialect: 'sqlite',
+            storage: ':memory',
             logging: false,
-            sync: {force:true},
+            sync: { force: true },
         });
 
-        afterEach(async () => {
-            await sequelize.close();
-        })
-    })
+    });
+
+    afterEach(async () => {
+        await sequelize.close();
+    });
+
 });
