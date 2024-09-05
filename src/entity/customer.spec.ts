@@ -26,6 +26,18 @@ describe("Customer unit tests", () => {
         //Assert
         expect(customer.name).toBe(new_name);
     })
+
+
+    it("should add reward points", () => {
+        const customer = new Customer("1", "Customer 1");
+        expect(customer.rewardPoints).toBe(0);
+
+        customer.addRewardPoints(10);
+        expect(customer.rewardPoints).toBe(10);
+
+        customer.addRewardPoints(10);
+        expect(customer.rewardPoints).toBe(20);
+    });
 })
 
 describe("Create customer", () => {
@@ -36,7 +48,7 @@ describe("Create customer", () => {
 
         expect(customer.address.city).toBe("Pirapora");
     })
-    
+
     it("should activate/deactivate customer", () => {
         const customer = new Customer("1", "Customer 1");
         const addr = new Address("Rua das Flores", 123, "80123-000", "Pirapora");
@@ -51,9 +63,9 @@ describe("Create customer", () => {
 
     it("should throw error when address is undefined on activating a customer", () => {
         expect(() => {
-          const customer = new Customer("1", "Customer 1");
-          customer.activate();
+            const customer = new Customer("1", "Customer 1");
+            customer.activate();
         }).toThrow("Address is mandatory to activate a customer");
-      });
+    });
 
 })
