@@ -1,7 +1,5 @@
 import OrderItem from './order_item';
 
-import { validateLocaleAndSetLanguage } from "typescript";
-
 export default class Order{
 
     private _id : string;
@@ -30,6 +28,10 @@ export default class Order{
         return this._items;
     }
     
+    changeItems(updatedListOfItems: OrderItem[]): void{
+        this._items = updatedListOfItems;
+    }
+
     total(): number{
         return this._items.reduce( (acc, item) => acc + item.orderItemTotal(), 0 );
     }
@@ -59,5 +61,22 @@ export default class Order{
             throw new Error("An Order require some Item");
         }
         return (true);
+    }
+
+    toJSON(): any{
+        return {
+
+            id: this._id,
+            customer_id: this._customer_id,
+            total: this.total(),
+            items: this._items.map(item => ({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity,
+                product_id: item.productId,
+            })), 
+        }
+
     }
 }
