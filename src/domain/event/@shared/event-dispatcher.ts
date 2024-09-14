@@ -10,8 +10,14 @@ export default class EventDispatcher implements EventDispatcherInterface{
         return this.eventHandlers;
     }
 
-    notify(event: EventInterface): void {
+    notify(par_event: EventInterface): void {
+        const l_eventName = par_event.constructor.name;
         
+        if ( this.eventHandlers[l_eventName] ){
+            this.eventHandlers[l_eventName].forEach((ll_eventHandler)=>{
+                ll_eventHandler.handle(par_event)
+            })
+        }
     }
 
     register(eventName: string, eventHandler: EventHandlerInterface): void {
